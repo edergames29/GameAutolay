@@ -15,5 +15,5 @@ Backup your progress
 Make automatic, minute-by-minute backups for more secure cloud saves running on multiple platforms.
 ## Screenshots
 
-![App Screenshot](/demonstrationl.png/468x300?text=App+Screenshot+Here)
+![App Screenshot](demonstrationl.png)
 
