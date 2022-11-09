@@ -3,6 +3,16 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+#adicionados
+/Backup
+/build
+/dist
+/build
+sub_face.spec
+base.spec
+app.log
+home.ini
+
 # User-specific files
 *.rsuser
 *.suo
