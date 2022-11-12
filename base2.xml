@@ -264,7 +264,7 @@ p, li { white-space: pre-wrap; }
             </property>
             <property name="font">
              <font>
-              <pointsize>14</pointsize>
+              <pointsize>13</pointsize>
               <weight>75</weight>
               <bold>true</bold>
              </font>
@@ -283,6 +283,12 @@ with date</string>
              <iconset>
               <normaloff>src/unarchive-icon.svg</normaloff>src/unarchive-icon.svg</iconset>
             </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
             <property name="checkable">
              <bool>false</bool>
             </property>
@@ -298,7 +304,7 @@ with date</string>
             </property>
             <property name="font">
              <font>
-              <pointsize>14</pointsize>
+              <pointsize>13</pointsize>
               <weight>75</weight>
               <italic>false</italic>
               <bold>true</bold>
@@ -307,11 +313,17 @@ with date</string>
             </property>
             <property name="text">
              <string>Overwrite
- old backup</string>
+old backup</string>
             </property>
             <property name="icon">
              <iconset>
               <normaloff>src/exchange-refresh-icon.svg</normaloff>src/exchange-refresh-icon.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
             </property>
            </widget>
           </item>
@@ -362,7 +374,9 @@ with date</string>
             <property name="font">
              <font>
               <weight>75</weight>
+              <italic>false</italic>
               <bold>true</bold>
+              <underline>false</underline>
              </font>
             </property>
             <property name="frame">
