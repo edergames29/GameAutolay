@@ -8,8 +8,7 @@
 /build
 /dist
 /build
-sub_face.spec
-base.spec
+*.spec
 app.log
 home.ini
 

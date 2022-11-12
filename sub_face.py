@@ -12,10 +12,10 @@ cancelLoopb=False
 
 
 #home.update_configfile()
-def backup():
+def backup(overwriteold=False):
     linetexttoconfigfile()
     window.lastbackup.setText(home.getdatestring())
-    home.main()
+    home.main(overwriteold)
 
 def cancel_loop():
     global cancelLoopb
@@ -46,7 +46,7 @@ def reset():
 class Ui(QtWidgets.QDialog):
     def __init__(self):
         super(Ui, self).__init__()
-        uic.loadUi('base.xml', self)
+        uic.loadUi('base2.xml', self)
         self.show()
 
         #toolbutton
@@ -55,13 +55,18 @@ class Ui(QtWidgets.QDialog):
         self.svsearchbutton.clicked.connect(selectfolderGameSave)
         self.baksearchbutton.clicked.connect(selectfolderBackupSave)
         #button
-        self.button = self.findChild(QtWidgets.QPushButton, "backupbutton")
+        self.backupbutton = self.findChild(QtWidgets.QPushButton, "backupbutton")
+        self.overwritebackupbutton = self.findChild(QtWidgets.QPushButton, "overwriteoldbackupbutton")
+
         self.buttonbackuploop = self.findChild(QtWidgets.QPushButton, "startloopbutton")
         self.lastbackup = self.findChild(QtWidgets.QLabel, "lastbackup")
         #label
         
-        self.button.clicked.connect(backup)
+        self.backupbutton.clicked.connect(backup)
+        self.overwritebackupbutton.clicked.connect(lambda: backup(True))
+        #open tread
         self.buttonbackuploop.clicked.connect(self.runLongTask)
+
 
         self.findChild(QtWidgets.QPushButton, "cancelbutton").clicked.connect(cancel_loop)
         #dialog

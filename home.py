@@ -65,7 +65,7 @@ def get_all_file_paths(directory):
     logging.info(f'Preparing to compress {len(file_paths)} files')
     return file_paths        
   
-def main():
+def main(overwriteold=False):
     
     backing_up=True #quando iniciar os processos de backup liga a variavel
     
@@ -82,11 +82,32 @@ def main():
   
     # writing files to a zipfile
     #myZipFile.write("test.py", "dir\\test.py", zipfile.ZIP_DEFLATED )
-    with ZipFile(config['DEFAULT']['PathBackupFile']+config['DEFAULT']['backupname']+'_'+getdatestring()+'.zip','w') as zip:
-        # writing each file one by one
-        for file in file_paths:
-            zip.write(file)
-  
+    if overwriteold:
+        path=config['DEFAULT']['PathBackupFile']+config['DEFAULT']['backupname']+'.zip'
+        logging.info("Criando arquivo de sobreposicao")
+
+        #test if an old zip exists
+        if os.path.exists(path):
+            logging.info("file already exists")
+            os.remove(path)
+            logging.info("old file removed")
+            
+        with ZipFile(path,'x') as zip:
+            # writing each file one by one
+
+            for file in file_paths:
+                zip.write(file)
+            zip.close()
+    else:
+        logging.info("Criando arquivo de criacao")
+        with ZipFile(config['DEFAULT']['PathBackupFile']+config['DEFAULT']['backupname']+'_'+getdatestring()+'.zip','w') as zip:
+            # writing each file one by one
+            for file in file_paths:
+                zip.write(file)
+            zip.close()
+            
+    
+
     print('All files zipped successfully!, CTRL+C to stop') 
     logging.info('All files zipped successfully!')
     backing_up=False

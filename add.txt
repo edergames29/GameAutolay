@@ -1,0 +1,4 @@
+Backup sobrepor
+Backup com data
+
+Colocar caminho completo da pasta Documents/Mygames quando iniciar pela primeira vez
