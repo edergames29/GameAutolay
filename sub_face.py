@@ -1,6 +1,6 @@
 from distutils.command.config import config
 from turtle import back
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, uic, QtGui
 from PyQt5.QtCore import QObject, QThread, pyqtSignal
 import sys
 import time
@@ -15,6 +15,10 @@ cancelLoopb=False
 def backup(overwriteold=False):
     linetexttoconfigfile()
     window.lastbackup.setText(home.getdatestring())
+    if overwriteold:
+        window.logview.insertItem(-1,'backup created'+str(home.getdatestring()))
+    else:
+        window.logview.insertItem(-1,'overwritten backup'+str(home.getdatestring())
     home.main(overwriteold)
 
 def cancel_loop():
@@ -31,7 +35,9 @@ def selectfolderBackupSave():
     dialog = QtWidgets.QFileDialog()
     folderpath=dialog.getExistingDirectory(None, "Select the folder where you want to save the files.")
     window.findChild(QtWidgets.QLineEdit, "linebackupsaver").setText(folderpath+'/')
-
+def addLista():
+    #window.logview.addItem('cebola'+str(home.getdatestring()),-1)
+    window.logview.insertItem(-1,'cebola'+str(home.getdatestring()))
 def reset():
     linebackupname = window.findChild(QtWidgets.QLineEdit, "labelbackupname")
     linebackupname.setText(home.config['DEFAULT']['backupname'])
@@ -52,6 +58,9 @@ class Ui(QtWidgets.QDialog):
         #toolbutton
         self.svsearchbutton = self.findChild(QtWidgets.QToolButton, "gamesavesearch")
         self.baksearchbutton = self.findChild(QtWidgets.QToolButton, "backupsavesearch")
+        self.resetbackupfolder = self.findChild(QtWidgets.QToolButton, "resetbackupfolder")
+        self.resetbackupfolder.clicked.connect(addLista)
+
         self.svsearchbutton.clicked.connect(selectfolderGameSave)
         self.baksearchbutton.clicked.connect(selectfolderBackupSave)
         #button
@@ -64,6 +73,8 @@ class Ui(QtWidgets.QDialog):
         
         self.backupbutton.clicked.connect(backup)
         self.overwritebackupbutton.clicked.connect(lambda: backup(True))
+        self.logview = self.findChild(QtWidgets.QListWidget, "logview")
+        self.logview.addItem('cebola')
         #open tread
         self.buttonbackuploop.clicked.connect(self.runLongTask)
 
@@ -113,8 +124,9 @@ class Worker(QObject):
         while True:
             print(cancelLoopb)
             if cancelLoopb:
-                
+                'loop cancelado'
                 print('loop cancelado')
+                window.logview.insertItem(-1,'Loop canceled'+str(home.getdatestring()))
                 window.findChild(QtWidgets.QProgressBar, "progressBar").setValue(0)
                 window.findChild(QtWidgets.QPushButton, "startloopbutton").setEnabled(True)
                 window.findChild(QtWidgets.QPushButton, "backupbutton").setEnabled(True)
